@@ -1,0 +1,19 @@
+{
+    "max_consciousness_level": 2.0,
+    "learning_rate": 0.001,
+    "memory_capacity": 50000,
+
+    "enable_voice": false,
+    "enable_web_api": true,
+    "enable_deep_learning": true,
+    "enable_cloud": false,
+
+    "api_host": "localhost",
+    "api_port": 8080,
+    "web_port": 8081,
+
+    "voice_rate": 150,
+    "voice_volume": 0.9,
+
+    "jwt_expiration": 3600
+}

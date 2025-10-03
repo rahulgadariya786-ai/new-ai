@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  ai-system:
+    build: .
+    container_name: ultimate-ai-system
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - AI_SECRET_KEY=your_secret_key_here
+      - REDIS_HOST=redis
+      - MONGO_URI=mongodb://mongodb:27017/
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./models:/app/models
+    depends_on:
+      - redis
+      - mongodb
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:5
+    container_name: ai-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
